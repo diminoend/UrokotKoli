@@ -12,6 +12,7 @@ from selenium.webdriver.common.by import By
 - добавление нового ученика в класс
 - Переход в ЛК
 - Закрытие браузера
+- test git
 """
 # Автоматизация через локаторы xpath по тегам с условиями
 # создание переменной с вызовом вебдрайвера
@@ -54,3 +55,4 @@ wd.find_element(By.XPATH, "//div[contains(@class, 'styles__Row')][last()]/div/di
 wd.find_element(By.XPATH, "//a[@href='https://ts01.shot-uchi.ru/teachers/stats/main']").click()
 # закрытие браузера
 wd.close()
+
