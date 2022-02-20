@@ -13,21 +13,21 @@ wd = webdriver.Chrome("C://chromedriver//chromedriver.exe") #переменна�
 wd.get('https://uchi.ru/') #открытие учи ру
 
 #поиск и взаимодействие с полем ввода логина с явным ожиданием
-login = wdw(wd,3).until(EC.presence_of_element_located((By.ID,'login'))).send_keys('login')
+login = wdw(wd,3).until(EC.presence_of_element_located((By.ID,'login'))).send_keys('1')
 
 #поиск и взаимодействие с полем ввода пароля с явным ожиданием
-password = wdw(wd,3).until(EC.presence_of_element_located((By.XPATH, '/html/body/main/section/div[2]/div/form/div[2]/input'))).send_keys('password')
+password = wdw(wd,3).until(EC.presence_of_element_located((By.XPATH, '/html/body/main/section/div[2]/div/form/div[2]/input'))).send_keys('1')
 
 #создание переменной с селектором кнопки войти через xpath
-log_in = wd.find_element_by_xpath('/html/body/main/section/div[2]/div/form/input[4]')
+log_in = wd.find_element(By.XPATH,'/html/body/main/section/div[2]/div/form/input[4]')
 
 #клик по кнопке войти
 log_in.click()
 
 
-main_page = 'https://uchi.ru/students/main' #переменная со статичным урлом
+main_page = 'https://uchi.ru/profile/students' #переменная со статичным урлом
 current_url = wd.current_url #берём текущий урл странички
 
 assert current_url == main_page, 'wrong url' #ассерт с проверкой текущего урла
 
-wd.close() #закрытие браузера
+#wd.close() #закрытие браузера

@@ -3,6 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait as wdw
 from selenium.webdriver.support import expected_conditions as ec
+import time
 
 # создание переменной с вызовом вебдрайвера
 wd = webdriver.Chrome("C://chromedriver//chromedriver.exe")
@@ -10,6 +11,7 @@ wd = webdriver.Chrome("C://chromedriver//chromedriver.exe")
 wd.maximize_window()
 # открытие странички
 wd.get('https://ts01.shot-uchi.ru/')
+
 # логин
 wd.find_element(By.ID, 'login').send_keys('wegweg@mail.ru')
 # ввод пароля
@@ -34,7 +36,8 @@ wd.switch_to.alert.accept()
 wd.find_element(By.XPATH, '//button[contains(text(),"Добавить ученика")]').click()
 
 # Неявное ожидание 1 сек поля Фамилия, добавление - Глав
-wdw(wd,1).until(ec.presence_of_element_located((By.XPATH, "//div[contains(@class, 'styles__Row')][last()]/div/div[2]/input"))).send_keys('Глав')
+wdw(wd,1).until(ec.presence_of_element_located(
+    (By.XPATH, "//div[contains(@class, 'styles__Row')][last()]/div/div[2]/input"))).send_keys('Глав')
 
 # вводим Имя - Рыба
 wd.find_element(By.XPATH, "//div[contains(@class, 'styles__Row')][last()]/div/div[3]/input").send_keys('Рыба')
@@ -44,6 +47,11 @@ wd.find_element(By.XPATH, "//div[contains(@class, 'styles__Row')][last()]/div/di
 wd.find_element(By.XPATH, "//div[contains(@class, 'styles__Row')][last()]/div/div[10]/button").click()
 # возврат в ЛК Учителя по клику лого в шапке
 wd.find_element(By.XPATH, "//a[@href='https://ts01.shot-uchi.ru/teachers/stats/main']").click()
-# закрытие браузера
-#wd.close()
 
+time.sleep(1)
+a = "https://ts01.shot-uchi.ru/teachers/lk/main"
+b = wd.current_url
+assert a == b
+
+# закрытие браузера
+wd.close()
