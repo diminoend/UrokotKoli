@@ -3,7 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait as wdw
 from selenium.webdriver.support import expected_conditions as ec
-import unittest, time
+import unittest
 '''
 - тест логина учителя
 - тест выбора класса из селектора в шапке
@@ -16,13 +16,21 @@ class teacher(unittest.TestCase):
         cls.wd = webdriver.Chrome('C://chromedriver//chromedriver.exe')
         cls.wd.get('https://ts01.shot-uchi.ru/')
 
-    def test_login(self):
+    def test_01_login(self):
         wd = self.wd
         login = wd.find_element(By.ID, 'login').send_keys('wegweg@mail.ru')
         password = wd.find_element(By.ID, 'password').send_keys('wegweg@mail.ru')
         log_in = wd.find_element(By.XPATH, '/html/body/main/section/div[2]/div/form/input[4]').click()
-        time.sleep(1)
+        wdw(wd, 3).until(ec.presence_of_element_located(
+            (By.XPATH, '//div[contains(text(),"Учительская доска")]')))
         self.assertEqual('https://ts01.shot-uchi.ru/teachers/lk/main', wd.current_url, 'ЛК не прогрузился')
+
+    def test_02_selecting_class(self):
+        wd = self.wd
+        wd.find_element(By.XPATH, '//div[contains(@class, "PlateClass")]').click()
+        wd.find_element(By.XPATH, "//a[contains(@data-onboarding, 'header-classlist-item-edit')]").click()
+        self.assertTrue(wd.find_element(By.XPATH, '//div[contains(text(),"Передайте доступы")]'))
+
 
     @classmethod
     def tearDownClass(cls):
