@@ -3,7 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait as wdw
 from selenium.webdriver.support import expected_conditions as ec
-import unittest
+import unittest, time
 '''
 - тест логина учителя
 - тест выбора класса из селектора в шапке
@@ -29,7 +29,10 @@ class teacher(unittest.TestCase):
         wd = self.wd
         wd.find_element(By.XPATH, '//div[contains(@class, "PlateClass")]').click()
         wd.find_element(By.XPATH, "//a[contains(@data-onboarding, 'header-classlist-item-edit')]").click()
-        self.assertTrue(wd.find_element(By.XPATH, '//div[contains(text(),"Передайте доступы")]'))
+        a = wdw(wd, 3).until(ec.presence_of_element_located(
+            (By.XPATH, '//div[contains(text(),"Передайте доступы")]')))
+        b = a
+        self.assertEqual(a, b, 'Не найден якорь - "Передайте доступы"')
 
 
     @classmethod
