@@ -14,6 +14,7 @@ class teacher(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.wd = webdriver.Chrome('C://chromedriver//chromedriver.exe')
+        cls.wd.maximize_window()
         cls.wd.get('https://ts01.shot-uchi.ru/')
 
     def test_01_login(self):
@@ -30,10 +31,8 @@ class teacher(unittest.TestCase):
         wd = self.wd
         wd.find_element(By.XPATH, '//div[contains(@class, "PlateClass")]').click()
         wd.find_element(By.XPATH, "//a[contains(@data-onboarding, 'header-classlist-item-edit')]").click()
-        a = wdw(wd, 3).until(ec.presence_of_element_located(
-            (By.XPATH, '//div[contains(text(),"Передайте доступы")]')))
-        b = a
-        self.assertEqual(a, b, 'Не найден якорь "Передайте доступы"')
+        self.assertTrue((wdw(wd, 3).until(ec.presence_of_element_located(
+            (By.XPATH, '//div[contains(text(),"Передайте доступы")]')))), 'Не найден якорь "Передайте доступы"')
 
     def test_03_add_student(self):
         # В классе должен уже быть хотя бы 1 ученик
@@ -41,15 +40,9 @@ class teacher(unittest.TestCase):
         # ожидание и клик по Далее в онбординге
         wdw(wd, 3).until(ec.presence_of_element_located((By.XPATH, '//div[contains(text(),"Далее")]'))).click()
         wd.find_element(By.XPATH, '//button[contains(text(),"Добавить ученика")]').click()
-        #name = wdw(wd, 1).until(ec.presence_of_element_located(
-        #    (By.XPATH, "//div[contains(@class, 'styles__Row')]/div/div[2]/input")))
-        #def generate_random_string(8):
-        #    letters_and_digits = string.ascii_letters + string.digits
-        #    name = ''.join(random.sample(letters_and_digits, length))
-
-        # wdw(wd, 1).until(ec.presence_of_element_located(
-        #    (By.XPATH, "//div[contains(@class, 'styles__Row')]/div/div[2]/input"))).send_keys('Иванов')
-        # wd.find_element(By.XPATH, "//div[contains(@class, 'styles__Row')][last()]/div/div[3]/input").send_keys('Костя')
+        wdw(wd, 1).until(ec.presence_of_element_located(
+            (By.XPATH, "//div[contains(@class, 'styles__Row')]/div/div[2]/input"))).send_keys('Иванов')
+        wd.find_element(By.XPATH, "//div[contains(@class, 'styles__Row')][last()]/div/div[3]/input").send_keys('Костя')
         wd.find_element(By.XPATH, "//div[contains(@class, 'styles__Row')][last()]/div/div[4]/label[1]").click()
         wd.find_element(By.XPATH, "//div[contains(@class, 'styles__Row')][last()]/div/div[10]/button").click()
         # Следующий тест проверяет что есть кнопка Удалить, которая появляется только при наличии ученика
