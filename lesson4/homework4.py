@@ -3,14 +3,15 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait as wdw
 from selenium.webdriver.support import expected_conditions as ec
-from PageObject.methods import login
+from PageObject.methods import *
+from PageObject.locators import *
 import unittest, time
 
 class teacher(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.wd = webdriver.Chrome('C://chromedriver//chromedriver.exe')
-        login(cls.wd, login='wegweg@mail.ru', password='wegweg@mail.ru')
+        login(cls.wd, login=loginx, password=passwordx)
 
     def test_01_login(cls):
         wd = cls.wd
