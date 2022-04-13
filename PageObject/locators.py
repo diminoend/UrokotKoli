@@ -26,3 +26,5 @@ class add_student():
     save = (By.XPATH, "//div[contains(@class, 'styles__Row')][last()]/div/div[10]/button")
     change = (By.XPATH, '//div[contains(text(),"Изменить")]')
     delete = (By.XPATH, '//div[contains(text(),"Удалить")]')
+    already_invited = (By.XPATH, '//div[contains(text(),"Приглашен")]')
+    invite = (By.XPATH, '//div[contains(text(),"Пригласить")]')

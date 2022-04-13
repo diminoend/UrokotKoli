@@ -1,3 +1,5 @@
+import time
+
 from PageObject.locators import *
 from selenium.webdriver.support.ui import WebDriverWait as wdw
 from selenium.webdriver.support import expected_conditions as ec
@@ -6,6 +8,9 @@ from selenium.webdriver.support import expected_conditions as ec
 # passwordx = 'wegweg@mail.ru'
 website = 'https://ts01.shot-uchi.ru/'
 # wd = webdriver.Chrome('C://chromedriver//chromedriver.exe')
+surnamex = 'Иванов'
+namex = 'Костя'
+
 
 def login(wd, loginx, passwordx):
         wd.maximize_window()
@@ -20,12 +25,20 @@ def selecting_class_in_lk(cls):
         wd.find_element(*lk_main.header_class_selector).click()
         wd.find_element(*lk_main.class_add_students).click()
 
-def add_student(cls, surname, name):
+def onboarding_click(cls):
+        wd = cls.wd
+        wdw(wd, 3).until(ec.presence_of_element_located(add_student.next)).click()
+
+def adding_student(cls, surnamex, namex):
         # В классе должен уже быть хотя бы 1 ученик
         wd = cls.wd
-        wdw(wd, 10).until(ec.presence_of_element_located(add_student.next)).click()
         wd.find_element(*add_student.add).click()
-        wdw(wd, 1).until(ec.presence_of_element_located(add_student.lastname)).send_keys(surname)
-        wd.find_element(*add_student.name).send_keys(name)
+        wdw(wd, 1).until(ec.presence_of_element_located(add_student.lastname)).send_keys(surnamex)
+        wd.find_element(*add_student.name).send_keys(namex)
         wd.find_element(*add_student.sex).click()
         wd.find_element(*add_student.save).click()
+
+def del_student(cls):
+        wd = cls.wd
+        wd.find_element(*add_student.delete).click()
+        wd.switch_to.alert.accept()

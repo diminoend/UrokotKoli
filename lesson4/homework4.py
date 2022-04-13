@@ -5,11 +5,14 @@ from PageObject.methods import *
 from PageObject.locators import *
 import unittest, time
 
+loginx = 'wegweg@mail.ru'
+passwordx = 'wegweg@mail.ru'
+
 class teacher(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         cls.wd = webdriver.Chrome('C://chromedriver//chromedriver.exe')
-        login(cls.wd, login=loginx, password=passwordx)
+        login(cls.wd, loginx, passwordx)
 
     def test_01_login(cls):
         # авторизация под Учителем

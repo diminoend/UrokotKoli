@@ -7,23 +7,23 @@ import unittest, time
 
 loginx = 'wegweg@mail.ru'
 passwordx = 'wegweg@mail.ru'
-
-# НЕПРАВИЛЬНАЯ ЛОГИКА. НЕ ИСПОЛЬЗОВАТЬ!!!!!!!!!!!!!!!!!
+surnamex = 'Иванов'
+namex = 'Костя'
 
 class teacher(unittest.TestCase):
     @classmethod
-    def setUpClass(cls):
+    def setUp(cls):
         cls.wd = webdriver.Chrome('C://chromedriver//chromedriver.exe')
-
-    def test_01_selecting_class(asd):
-        login(asd.wd, loginx, passwordx)
-        selecting_class_in_lk(asd)
-
-    def test_02_add_student(cls):
         login(cls.wd, loginx, passwordx)
         selecting_class_in_lk(cls)
-        add_student()
-        time.sleep(5)
+
+    def test_01_add_student(cls):
+        wd = cls.wd
+        wd.find_element(*add_student.add).click()
+        wdw(wd, 1).until(ec.presence_of_element_located(add_student.lastname)).send_keys(surnamex)
+        wd.find_element(*add_student.name).send_keys(namex)
+        wd.find_element(*add_student.sex).click()
+        wd.find_element(*add_student.save).click()
 
     @classmethod
     def tearDownClass(cls):
