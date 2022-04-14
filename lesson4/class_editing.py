@@ -9,6 +9,7 @@ loginx = 'wegweg@mail.ru'
 passwordx = 'wegweg@mail.ru'
 surnamex = 'Иванов'
 namex = 'Костя'
+parents_email = 'parents123123123123_123@mail.ru'
 
 class teacher(unittest.TestCase):
     @classmethod
@@ -37,12 +38,16 @@ class teacher(unittest.TestCase):
 
     def test_03_invite(cls):
         wd = cls.wd
-        if len(*add_student.already_invited) != 0:
-            wd.find_element(*add_student.invite).click()
-
-
-        # print(len(wd.find_elements(By.XPATH, '//div[contains(text(),"Приглашен")]')))
-
+        count_invite_1 = len(wd.find_elements(By.CSS_SELECTOR, "[class*='Invited']"))
+        adding_student(cls, surnamex, namex)
+        wd.find_element(*add_student.invite).click()
+        wd.find_element(By.CSS_SELECTOR, 'input[name]').send_keys(parents_email)
+        wd.find_element(By.XPATH, "//button[text()='Пригласить']").click()
+        time.sleep(2)
+        count_invite_2 = len(wd.find_elements(By.CSS_SELECTOR, "[class*='Invited']"))
+        cls.assertTrue(count_invite_1 < count_invite_2, 'Приглашение не отправлено')
+        time.sleep(2)
+        del_student(cls)
 
     @classmethod
     def tearDownClass(cls):
