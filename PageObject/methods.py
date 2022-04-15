@@ -8,8 +8,8 @@ from selenium.webdriver.support import expected_conditions as ec
 # passwordx = 'wegweg@mail.ru'
 website = 'https://ts01.shot-uchi.ru/'
 # wd = webdriver.Chrome('C://chromedriver//chromedriver.exe')
-surnamex = 'Иванов'
-namex = 'Костя'
+# surnamex = 'Иванов'
+# namex = 'Костя'
 
 
 def login(wd, loginx, passwordx):
@@ -30,15 +30,23 @@ def onboarding_click(cls):
         wdw(wd, 3).until(ec.presence_of_element_located(add_student.next)).click()
 
 def adding_student(cls, surnamex, namex):
-        # В классе должен уже быть хотя бы 1 ученик
         wd = cls.wd
-        wd.find_element(*add_student.add).click()
-        wdw(wd, 1).until(ec.presence_of_element_located(add_student.lastname)).send_keys(surnamex)
-        wd.find_element(*add_student.name).send_keys(namex)
-        wd.find_element(*add_student.sex).click()
-        wd.find_element(*add_student.save).click()
+        if len(wd.find_elements(*add_student.change)) >= 1:
+                wd.find_element(*add_student.add).click()
+                wdw(wd, 1).until(ec.presence_of_element_located(add_student.lastname)).send_keys(surnamex)
+                wd.find_element(*add_student.name).send_keys(namex)
+                wd.find_element(*add_student.sex).click()
+                wd.find_element(*add_student.save).click()
+        else:
+                wd.find_element(*add_student.lastname).send_keys(surnamex)
+                wd.find_element(*add_student.name).send_keys(namex)
+                wd.find_element(*add_student.sex).click()
+                wd.find_element(*add_student.save).click()
 
 def del_student(cls):
         wd = cls.wd
         wd.find_element(*add_student.delete).click()
         wd.switch_to.alert.accept()
+
+# def prnts_invte(cls, parents_email)
+

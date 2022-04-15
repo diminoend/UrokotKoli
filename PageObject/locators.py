@@ -28,3 +28,6 @@ class add_student():
     delete = (By.XPATH, '//div[contains(text(),"Удалить")]')
     already_invited = (By.XPATH, '//div[contains(text(),"Приглашен")]')
     invite = (By.XPATH, '//div[contains(text(),"Пригласить")]')
+    parents_invited = (By.CSS_SELECTOR, "[class*='Invited']")
+    prnts_email = (By.CSS_SELECTOR, 'input[name]')
+    invite_btn_input = (By.XPATH, "//button[text()='Пригласить']")

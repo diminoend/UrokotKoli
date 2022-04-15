@@ -20,6 +20,7 @@ class teacher(unittest.TestCase):
         wd = cls.wd
         wdw(wd, 3).until(ec.presence_of_element_located((add_student.next))).click()
 
+# Добавление студента
     def test_01_adding_student(cls):
         wd = cls.wd
         count_del_word_1 = len(wd.find_elements(*add_student.change))
@@ -28,23 +29,27 @@ class teacher(unittest.TestCase):
         count_del_word_2 = len(wd.find_elements(*add_student.change))
         cls.assertTrue(count_del_word_1 < count_del_word_2, 'Студент не добавился')
 
+# Удаление студента
     def test_02_deleting_student(cls):
         wd = cls.wd
+        adding_student(cls, surnamex, namex)
+        time.sleep(2)
         count_del_word_1 = len(wd.find_elements(*add_student.change))
         del_student(cls)
         time.sleep(2)
         count_del_word_2 = len(wd.find_elements(*add_student.change))
         cls.assertTrue(count_del_word_1 > count_del_word_2, 'Студент не удалился')
 
+# Приглашение родителя
     def test_03_invite(cls):
         wd = cls.wd
-        count_invite_1 = len(wd.find_elements(By.CSS_SELECTOR, "[class*='Invited']"))
+        count_invite_1 = len(wd.find_elements(*add_student.parents_invited))
         adding_student(cls, surnamex, namex)
         wd.find_element(*add_student.invite).click()
-        wd.find_element(By.CSS_SELECTOR, 'input[name]').send_keys(parents_email)
-        wd.find_element(By.XPATH, "//button[text()='Пригласить']").click()
+        wd.find_element(*add_student.prnts_email).send_keys(parents_email)
+        wd.find_element(*add_student.invite_btn_input).click()
         time.sleep(2)
-        count_invite_2 = len(wd.find_elements(By.CSS_SELECTOR, "[class*='Invited']"))
+        count_invite_2 = len(wd.find_elements(*add_student.parents_invited))
         cls.assertTrue(count_invite_1 < count_invite_2, 'Приглашение не отправлено')
         time.sleep(2)
         del_student(cls)
