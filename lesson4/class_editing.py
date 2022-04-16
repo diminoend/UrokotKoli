@@ -1,3 +1,5 @@
+# Проверка страницы Редактирования класса - https://ts01.shot-uchi.ru/signup/teacher/add/students?groupid={id_класса}
+
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait as wdw
 from selenium.webdriver.support import expected_conditions as ec
@@ -40,19 +42,40 @@ class teacher(unittest.TestCase):
         count_del_word_2 = len(wd.find_elements(*add_student.change))
         cls.assertTrue(count_del_word_1 > count_del_word_2, 'Студент не удалился')
 
-# Приглашение родителя
+# Приглашение родителя. Добавляем и удаляем студентов, т.к. уже могут быть все приглашены
     def test_03_invite(cls):
         wd = cls.wd
         count_invite_1 = len(wd.find_elements(*add_student.parents_invited))
         adding_student(cls, surnamex, namex)
-        wd.find_element(*add_student.invite).click()
-        wd.find_element(*add_student.prnts_email).send_keys(parents_email)
-        wd.find_element(*add_student.invite_btn_input).click()
+        prnts_invite(cls, parents_email)
+        # wdw(wd, 10).until(ec.presence_of_element_located(add_student.parents_invited))
         time.sleep(2)
         count_invite_2 = len(wd.find_elements(*add_student.parents_invited))
         cls.assertTrue(count_invite_1 < count_invite_2, 'Приглашение не отправлено')
         time.sleep(2)
         del_student(cls)
+
+# Кнопка Передать доступ
+    def test_04_give_access(cls):
+        wd = cls.wd
+        wd.find_element(*add_student.giveacces_btn).click()
+        wdw(wd, 10).until(ec.presence_of_element_located(add_student.giveaccess_phrase1))
+        count_msg_1 = len(wd.find_elements(*add_student.giveaccess_phrase1))
+        count_msg_2 = len(wd.find_elements(*add_student.giveaccess_phrase2))
+        cls.assertTrue(count_msg_1 == 1, 'Пропала фраза-якорь 1')
+        cls.assertTrue(count_msg_2 == 1, 'Пропала фраза-якорь 2')
+
+# Кнопка Изменить (переход в редактирование предметов класса)
+    def test_05_class_edit(cls):
+        wd = cls.wd
+        wd.find_element(*add_student.cls_editing).click()
+        wdw(wd, 10).until(ec.presence_of_element_located(class_editing.clsedit_phrase1))
+        # time.sleep(2)
+        count_msg_1 = len(wd.find_elements(*class_editing.clsedit_phrase1))
+        count_msg_2 = len(wd.find_elements(*class_editing.clsedit_phrase2))
+        cls.assertTrue(count_msg_1 == 1, 'Пропала фраза-якорь 1')
+        cls.assertTrue(count_msg_2 == 1, 'Пропала фраза-якорь 2')
+
 
     @classmethod
     def tearDownClass(cls):

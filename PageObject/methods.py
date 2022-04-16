@@ -48,5 +48,8 @@ def del_student(cls):
         wd.find_element(*add_student.delete).click()
         wd.switch_to.alert.accept()
 
-# def prnts_invte(cls, parents_email)
-
+def prnts_invite(cls, parents_email):
+        wd = cls.wd
+        wd.find_element(*add_student.invite).click()
+        wd.find_element(*add_student.prnts_email).send_keys(parents_email)
+        wd.find_element(*add_student.invite_btn_input).click()

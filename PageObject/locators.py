@@ -31,3 +31,11 @@ class add_student():
     parents_invited = (By.CSS_SELECTOR, "[class*='Invited']")
     prnts_email = (By.CSS_SELECTOR, 'input[name]')
     invite_btn_input = (By.XPATH, "//button[text()='Пригласить']")
+    giveacces_btn = (By.XPATH, "//button[text()='Передать доступ']")
+    giveaccess_phrase1 = (By.XPATH, "//li[text()='Каждый родитель сможет найти ']")
+    giveaccess_phrase2 = (By.XPATH, "//li[text()=' и начните заниматься.']")
+    cls_editing = (By.XPATH, "//span[contains(text(),'изменить')]")
+
+class class_editing():
+    clsedit_phrase1 = (By.XPATH, '//div[contains(text(),"Редактирование класса")]')
+    clsedit_phrase2 = (By.XPATH, "//label[contains(text(),'Программа по предметам:')]")
