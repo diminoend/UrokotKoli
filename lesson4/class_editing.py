@@ -12,6 +12,9 @@ passwordx = 'wegweg@mail.ru'
 surnamex = 'Иванов'
 namex = 'Костя'
 parents_email = 'parents123123123123_123@mail.ru'
+lastnamexx = '1'
+namexx = '1'
+pswrdxx = 'змн123'
 
 class teacher(unittest.TestCase):
     @classmethod
@@ -30,6 +33,7 @@ class teacher(unittest.TestCase):
         time.sleep(2)
         count_del_word_2 = len(wd.find_elements(*add_student.change))
         cls.assertTrue(count_del_word_1 < count_del_word_2, 'Студент не добавился')
+        del_student(cls)
 
 # Удаление студента
     def test_02_deleting_student(cls):
@@ -75,6 +79,13 @@ class teacher(unittest.TestCase):
         count_msg_2 = len(wd.find_elements(*class_editing.clsedit_phrase2))
         cls.assertTrue(count_msg_1 == 1, 'Пропала фраза-якорь 1')
         cls.assertTrue(count_msg_2 == 1, 'Пропала фраза-якорь 2')
+
+# Кнопка Изменить (редактирование имени, фамилии, итд)
+    def test_06_student_edit(cls):
+        wd = cls.wd
+        student_editing(cls, lastnamexx, namexx, pswrdxx)
+        # добавить удаление всего что написано в строке, заменить на новое ФИО.
+        # ассерт на новую фамилию, затем удаление этого студента
 
 
     @classmethod

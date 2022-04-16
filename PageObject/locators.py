@@ -35,6 +35,12 @@ class add_student():
     giveaccess_phrase1 = (By.XPATH, "//li[text()='Каждый родитель сможет найти ']")
     giveaccess_phrase2 = (By.XPATH, "//li[text()=' и начните заниматься.']")
     cls_editing = (By.XPATH, "//span[contains(text(),'изменить')]")
+    pswrd_hint = (By.CSS_SELECTOR,"[class*=PasswordHint]")
+    lastname_change = (By.XPATH, "//div[contains(@class, 'PasswordHint')]/../div/div[2]/input")
+    name_change = (By.XPATH, "//div[contains(@class, 'PasswordHint')]/../div/div[3]/input")
+    sex_change = (By.XPATH, "//div[contains(@class, 'PasswordHint')]/../div/div[4]/label[2]")
+    pswrd_change = (By.XPATH, "//div[contains(@class, 'PasswordHint')]/../div/div[8]/input")
+    btn_save_change = (By.XPATH, "//div[contains(@class, 'PasswordHint')]/../div/div[10]/button")
 
 class class_editing():
     clsedit_phrase1 = (By.XPATH, '//div[contains(text(),"Редактирование класса")]')
