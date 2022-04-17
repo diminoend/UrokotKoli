@@ -1,8 +1,10 @@
 import time
-
+import random
+import string
 from PageObject.locators import *
 from selenium.webdriver.support.ui import WebDriverWait as wdw
 from selenium.webdriver.support import expected_conditions as ec
+
 
 # loginx= 'wegweg@mail.ru'
 # passwordx = 'wegweg@mail.ru'
@@ -58,7 +60,9 @@ def student_editing(cls, lastnamexx, namexx, pswrdxx):
         wd = cls.wd
         wd.find_element(*add_student.change).click()
         wdw(wd, 3).until(ec.presence_of_element_located(add_student.pswrd_hint))
+        wd.find_element(*add_student.lastname_change).clear()
         wd.find_element(*add_student.lastname_change).send_keys(lastnamexx)
+        wd.find_element(*add_student.name_change).clear()
         wd.find_element(*add_student.name_change).send_keys(namexx)
         wd.find_element(*add_student.sex_change).click()
         wd.find_element(*add_student.pswrd_change).send_keys(pswrdxx)

@@ -41,6 +41,7 @@ class add_student():
     sex_change = (By.XPATH, "//div[contains(@class, 'PasswordHint')]/../div/div[4]/label[2]")
     pswrd_change = (By.XPATH, "//div[contains(@class, 'PasswordHint')]/../div/div[8]/input")
     btn_save_change = (By.XPATH, "//div[contains(@class, 'PasswordHint')]/../div/div[10]/button")
+    newpswrd = (By.XPATH, "//div[contains(text(),'змн84952')]")
 
 class class_editing():
     clsedit_phrase1 = (By.XPATH, '//div[contains(text(),"Редактирование класса")]')

@@ -12,9 +12,9 @@ passwordx = 'wegweg@mail.ru'
 surnamex = 'Иванов'
 namex = 'Костя'
 parents_email = 'parents123123123123_123@mail.ru'
-lastnamexx = '1'
-namexx = '1'
-pswrdxx = 'змн123'
+lastnamexx = 'Петрова123'
+namexx = 'Настя123'
+pswrdxx = 'змн84952'
 
 class teacher(unittest.TestCase):
     @classmethod
@@ -84,9 +84,12 @@ class teacher(unittest.TestCase):
     def test_06_student_edit(cls):
         wd = cls.wd
         student_editing(cls, lastnamexx, namexx, pswrdxx)
-        # добавить удаление всего что написано в строке, заменить на новое ФИО.
-        # ассерт на новую фамилию, затем удаление этого студента
-
+        time.sleep(2)
+        count_msg_1 = len(wd.find_elements(*add_student.newpswrd))
+        cls.assertTrue(count_msg_1 == 1, 'Пароль не изменился')
+        cls.assertTrue(namexx == 'Настя123', 'Имя не изменилось')
+        time.sleep(2)
+        del_student(cls)
 
     @classmethod
     def tearDownClass(cls):
