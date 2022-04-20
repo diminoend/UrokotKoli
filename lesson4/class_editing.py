@@ -75,10 +75,11 @@ class teacher(unittest.TestCase):
         wd.find_element(*add_student.cls_editing).click()
         wdw(wd, 10).until(ec.presence_of_element_located(class_editing.clsedit_phrase1))
         # time.sleep(2)
-        count_msg_1 = len(wd.find_elements(*class_editing.clsedit_phrase1))
-        count_msg_2 = len(wd.find_elements(*class_editing.clsedit_phrase2))
-        cls.assertTrue(count_msg_1 == 1, 'Пропала фраза-якорь 1')
-        cls.assertTrue(count_msg_2 == 1, 'Пропала фраза-якорь 2')
+        # count_msg_1 = len(wd.find_elements(*class_editing.clsedit_phrase1))
+        # count_msg_2 = len(wd.find_elements(*class_editing.clsedit_phrase2))
+        count_msg_2 = wd.find_element(By.CSS_SELECTOR, '[data-event-info="delete_class"]')
+        # cls.assertTrue(count_msg_1 == 1, 'Пропала фраза-якорь 1')
+        cls.assertTrue(count_msg_2 != 0, 'Пропала фраза-якорь 2')
 
 # Кнопка Изменить (редактирование имени, фамилии, итд)
     def test_06_student_edit(cls):

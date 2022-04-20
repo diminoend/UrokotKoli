@@ -45,4 +45,6 @@ class add_student():
 
 class class_editing():
     clsedit_phrase1 = (By.XPATH, '//div[contains(text(),"Редактирование класса")]')
-    clsedit_phrase2 = (By.XPATH, "//label[contains(text(),'Программа по предметам:')]")
+    # clsedit_phrase2 = (By.XPATH, "//label[contains(text(),'Программа по предметам:')]")
+    clsedit_phrase2 = (By.CLASS_NAME, "[class = col-xs-12.mb-10.mt-10]")
+    By.CSS_SELECTOR, '[data-event-info="delete_class"]'
