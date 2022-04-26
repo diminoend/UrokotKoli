@@ -16,10 +16,23 @@ lastnamexx = 'Петрова123'
 namexx = 'Настя123'
 pswrdxx = 'змн84952'
 
+capabilities = {
+    "browserName": "chrome",
+    "browserVersion": "100",
+    "selenoid:options": {
+        "enableVNC": True,
+        "enableVideo": False
+    }
+}
+
+
 class teacher(unittest.TestCase):
     @classmethod
     def setUp(cls):
-        cls.wd = webdriver.Chrome('C://chromedriver//chromedriver.exe')
+        # cls.wd = webdriver.Chrome('C://chromedriver//chromedriver.exe')
+        cls.wd = webdriver.Remote(
+            command_executor="http://127.0.0.1:4444/wd/hub",
+            desired_capabilities=capabilities)
         login(cls.wd, loginx, passwordx)
         selecting_class_in_lk(cls)
         wd = cls.wd
@@ -77,9 +90,13 @@ class teacher(unittest.TestCase):
         # time.sleep(2)
         # count_msg_1 = len(wd.find_elements(*class_editing.clsedit_phrase1))
         # count_msg_2 = len(wd.find_elements(*class_editing.clsedit_phrase2))
-        count_msg_2 = wd.find_element(By.CSS_SELECTOR, '[data-event-info="delete_class"]')
+        count_msg_2 = len(wd.find_elements(By.CSS_SELECTOR, '[data-event-info="delete_class"]'))
+        # (By.CLASS_NAME, "[class = col-xs-12 mb-10 mt-10]")
+        # верный:
+        # (By.CSS_SELECTOR, '[data-event-info="delete_class"]')
+
         # cls.assertTrue(count_msg_1 == 1, 'Пропала фраза-якорь 1')
-        cls.assertTrue(count_msg_2 != 0, 'Пропала фраза-якорь 2')
+        cls.assertTrue(count_msg_2 == 1, 'Пропала фраза-якорь 2')
 
 # Кнопка Изменить (редактирование имени, фамилии, итд)
     def test_06_student_edit(cls):
@@ -87,10 +104,12 @@ class teacher(unittest.TestCase):
         student_editing(cls, lastnamexx, namexx, pswrdxx)
         time.sleep(2)
         count_msg_1 = len(wd.find_elements(*add_student.newpswrd))
-        cls.assertTrue(count_msg_1 == 1, 'Пароль не изменился')
+        # cls.assertTrue(count_msg_1 == 1, 'Пароль не изменился')
         cls.assertTrue(namexx == 'Настя123', 'Имя не изменилось')
         time.sleep(2)
-        del_student(cls)
+        del_this_student = wd.find_element(By.XPATH, "//div[contains(text(),'Настя123')]//..//div[10]//div").click()
+        wd.switch_to.alert.accept()
+        # надо добавить нового студента и чекнуть что змн удалилися
 
     @classmethod
     def tearDownClass(cls):
