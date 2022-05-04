@@ -5,6 +5,25 @@ from PageObject.methods import *
 from PageObject.locators import *
 import unittest, time
 
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+
+link = "http://suninjuly.github.io/simple_form_find_task.html"
+
+try:
+    browser = webdriver.Chrome('C://chromedriver//chromedriver.exe')
+    browser.get(link)
+    button = browser.find_element(By.ID, "submit_button")
+    button.click()
+
+finally:
+    # закрываем браузер после всех манипуляций
+    browser.quit()
+
+# закрываем браузер после всех манипуляций
+browser.quit()
+'''
 class teacher(unittest.TestCase):
     @classmethod
     def setUp(cls):
@@ -23,4 +42,4 @@ class teacher(unittest.TestCase):
         cls.wd.close()
 
 if __name__ == "__main__":
-    unittest.main()
+    unittest.main()'''
