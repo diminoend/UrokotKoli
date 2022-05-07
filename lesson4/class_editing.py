@@ -1,5 +1,6 @@
 # Проверка страницы Редактирования класса - https://ts01.shot-uchi.ru/signup/teacher/add/students?groupid={id_класса}
 
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait as wdw
 from selenium.webdriver.support import expected_conditions as ec
@@ -29,7 +30,7 @@ pswrdxx = 'змн84952'
 class teacher(unittest.TestCase):
     @classmethod
     def setUp(cls):
-        cls.wd = webdriver.Chrome('C://chromedriver//chromedriver.exe')
+        cls.wd = webdriver.Chrome(executable_path=ChromeDriverManager().install())
         '''cls.wd = webdriver.Remote(
             command_executor="http://127.0.0.1:4444/wd/hub",
             desired_capabilities=capabilities)'''
