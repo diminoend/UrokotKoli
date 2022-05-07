@@ -3,6 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
+#erefewrferf
 
 browser = webdriver.Chrome(executable_path=ChromeDriverManager().install())
 browser.implicitly_wait(5)
