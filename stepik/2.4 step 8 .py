@@ -6,6 +6,7 @@ from webdriver_manager.chrome import ChromeDriverManager as CDM
 from selenium.webdriver.support import expected_conditions as ec
 from selenium import webdriver
 import math
+#ghghgk
 
 link = 'http://suninjuly.github.io/explicit_wait2.html'
 br = webdriver.Chrome(executable_path=CDM().install())
