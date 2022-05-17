@@ -26,12 +26,14 @@ class add_student():
     save = (By.XPATH, "//div[contains(@class, 'styles__Row')][last()]/div/div[10]/button")
     change = (By.XPATH, '//div[contains(text(),"Изменить")]')
     delete = (By.XPATH, '//div[contains(text(),"Удалить")]')
-    already_invited = (By.XPATH, '//div[contains(text(),"Приглашен")]')
+    already_invited = (By.XPATH, "//h2[contains(text(), 'Приглашение отправлено')]")
     invite = (By.XPATH, '//div[contains(text(),"Пригласить")]')
     parents_invited = (By.CSS_SELECTOR, "[class*='Invited']")
-    prnts_email = (By.CSS_SELECTOR, 'input[name]')
+    prnts_email = (By.CSS_SELECTOR, '[name=email]')
     invite_btn_input = (By.XPATH, "//button[text()='Пригласить']")
     giveacces_btn = (By.XPATH, "//button[text()='Передать доступ']")
+    another_prnts_mail = (By.XPATH, "//button[contains(text(), 'Пригласить на другую почту')]")
+    another_prnts_mail_close = (By.CLASS_NAME, "styles__StyledCloseIcon-sc-3kw6g0-8")
     giveaccess_phrase1 = (By.XPATH, "//li[text()='Каждый родитель сможет найти ']")
     giveaccess_phrase2 = (By.XPATH, "//li[text()=' и начните заниматься.']")
     cls_editing = (By.XPATH, "//span[contains(text(),'изменить')]")
@@ -46,5 +48,4 @@ class add_student():
 
 class class_editing():
     clsedit_phrase1 = (By.XPATH, '//div[contains(text(),"Редактирование класса")]')
-    # clsedit_phrase2 = (By.XPATH, "//label[contains(text(),'Программа по предметам:')]")
-    clsedit_phrase2 = (By.CLASS_NAME, "[class = col-xs-12.mb-10.mt-10]")
+    clsedit_phrase2 = (By.CLASS_NAME, "col-xs-12.mb-10.mt-10")
