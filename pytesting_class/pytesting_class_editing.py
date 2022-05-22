@@ -16,11 +16,11 @@ parents_email = 'parents123123123123_123@mail.ru'
 lastnamexx = 'Петрова123'
 namexx = 'Настя123'
 pswrdxx = 'змн84952'
-link = 'https://ts01.shot-uchi.ru/'
+# link = 'https://ts01.shot-uchi.ru/'
 
-website = 'https://ts01.shot-uchi.ru/'
-loginx = 'wegweg@mail.ru'
-passwordx = 'wegweg@mail.ru'
+# website = 'https://ts01.shot-uchi.ru/'
+# loginx = 'wegweg@mail.ru'
+# passwordx = 'wegweg@mail.ru'
 
 
 class Test_Class_editing:
@@ -46,6 +46,7 @@ class Test_Class_editing:
         adding_student(self, browser, surnamex, namex)
         prnts_invite(self, browser, parents_email)
         browser.find_element(*add_student.invite).click()
+        # Текст в модале - Приглашение отправлено
         assert len(browser.find_elements(*add_student.already_invited)) == 1, "Приглашение не отправлено"
         browser.find_element(*add_student.another_prnts_mail_close).click()
         del_student(self, browser)
@@ -80,10 +81,27 @@ class Test_Class_editing:
         time.sleep(2)
         count_msg_1 = len(browser.find_elements(*add_student.newpswrd))
         newnamexx = len(browser.find_elements(*add_student.newname))
-        assert count_msg_1 == 1, 'Passwoed has not change'
+        assert count_msg_1 == 1, 'Password has not change'
         assert newnamexx == 1, 'Name has not change'
         time.sleep(2)
         # delete this student
         browser.find_element(By.XPATH, "//div[contains(text(),'Настя123')]//..//div[10]//div").click()
         browser.switch_to.alert.accept()
         time.sleep(2)
+
+'''
+    # Проверка того что при отправленном приглашении, в модале можно отправить приглос на другую почту
+    def test_07_another_prnts_mail(self, browser):
+        adding_student(self, browser, surnamex, namex)
+        prnts_invite(self, browser, parents_email)
+        invite_btn = browser.find_element(*add_student.invite).click()
+        browser.find_element(add_student.another_prnts_mail).click()
+        browser.find_element(add_student.prnts_email).send_keys(parents_email)
+        browser.find_element(add_student.invite_btn_input).click()
+        invite_btn.click()
+
+        # del_student(self, browser)
+        time.sleep(3)
+
+    # Родитель принял приглашение
+'''

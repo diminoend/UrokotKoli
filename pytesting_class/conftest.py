@@ -7,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as ec
 import time
 
 website = 'https://ts01.shot-uchi.ru/'
+# website = 'https://uchi.ru/'
 loginx = 'wegweg@mail.ru'
 passwordx = 'wegweg@mail.ru'
 
